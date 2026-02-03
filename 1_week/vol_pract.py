@@ -27,3 +27,19 @@ vol_eth = vol(eth_ret)
 
 print(f"Доходность BTC: {btc_ret}\n Доходность ETH: {eth_ret}\n Корреляция: {cor}")
 print(f"Волатильность BTC: {vol_btc:.2f}\nВолатильность ETH: {vol_eth:.2f}")
+
+
+import matplotlib.pyplot as plt
+
+plt.figure(figsize=(14, 6))
+plt.plot(btc_ret.index, btc_ret.cumsum(), label='BTC', linewidth=2)
+plt.plot(eth_ret.index, eth_ret.cumsum(), label='ETH', linewidth=2)
+plt.axhline(0, color='k', linestyle='--', alpha=0.3)
+plt.title('Кумулятивная доходность BTC vs ETH (1 год)', fontsize=14)
+plt.ylabel('Суммарная доходность')
+plt.legend()
+plt.grid(True, alpha=0.3)
+plt.savefig('btc_eth_cumulative.png', dpi=150, bbox_inches='tight')
+plt.show()
+
+print("График сохранён: видно, где активы расходились!")
